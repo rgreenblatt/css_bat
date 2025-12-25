@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bella the Bat - CSS Animations</title>
+  <style>
+    :root {
+      --bg-dark: #0f0a1a;
+      --bg-mid: #1a1525;
+      --bg-light: #251e35;
+      --text-primary: #f5f0dc;
+      --text-secondary: #a89fc4;
+      --accent: #c4868c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at bottom, var(--bg-light) 0%, var(--bg-mid) 40%, var(--bg-dark) 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-primary);
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .animations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .animation-card {
+      background: rgba(37, 30, 53, 0.6);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(168, 159, 196, 0.2);
+    }
+
+    .animation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-preview {
+      height: 200px;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-preview::before {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: var(--text-primary);
+      border-radius: 50%;
+      opacity: 0.1;
+      top: 20px;
+      right: 30px;
+    }
+
+    .bat-icon {
+      font-size: 4rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .view-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg-dark);
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .view-btn:hover {
+      background: #d89da2;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(168, 159, 196, 0.2);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <header>
+      <h1>Bella the Bat</h1>
+      <p class="subtitle">Pure CSS Animations</p>
+    </header>
+
+    <div class="animations-grid">
+      <div class="animation-card">
+        <div class="card-preview">
+          <span class="bat-icon">🦇</span>
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">Bella the Bat</h2>
+          <p class="card-description">Created by Opus 4.5 (Claude Code) without any testing.</p>
+          <a href="bella_the_bat.html" class="view-btn">View Animation</a>
+        </div>
+      </div>
+
+      <div class="animation-card">
+        <div class="card-preview">
+          <span class="bat-icon" style="animation-delay: -1s;">🦇</span>
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">Bella's Adventure</h2>
+          <p class="card-description">Created by Opus 4.5 (Claude Code) without any testing.</p>
+          <a href="bella_adventure.html" class="view-btn">View Animation</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Made with CSS</p>
+    </footer>
+  </div>
+
+  <script>
+    // Generate random stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+</html>
